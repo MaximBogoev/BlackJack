@@ -8,6 +8,9 @@ const deck = ["2♠","2♥","2♦","2♣" ,"3♠","3♥","3♦","3♣" ,"4♠","
 const usedCards = [];
 let isPlayerTurn = true;
 
+let playerValueDisplay = document.getElementById("P-Value");
+let dealerValueDisplay = document.getElementById("D-Value");
+
 /* ====================== */
 /* 2. Button Wiring       */
 /* ====================== */
@@ -20,8 +23,9 @@ stayBtn.addEventListener("click",stay);
 hitBtn.addEventListener("click", async () => {
   if (isPlayerTurn) {
     await hit();
-    if (calculateHandValue(document.getElementById("playersHand")) > 21) {
-      console.log("Player busts!");
+    playerValue=calculateHandValue(document.getElementById("playersHand"));
+    playerValueDisplay.innerHTML=playerValue;
+    if (playerValue >= 21) {
       endRound();
     }
   }
@@ -36,12 +40,18 @@ async function startRound() {
   hitBtn.disabled = false;
   stayBtn.disabled = false;
   startBtn.disabled = true;
+  playerValueDisplay.innerHTML="0";
+  dealerValueDisplay.innerHTML="0";
   isPlayerTurn = true; // Reset the turn to the player
   console.log("round started");
   await resetHands();
   await hit(); // Player's first card
+    playerValue=calculateHandValue(document.getElementById("playersHand"));
+    playerValueDisplay.innerHTML=playerValue;
   await new Promise((resolve) => setTimeout(resolve, 200)); // Small delay
   await hit(); // Player's second card
+    playerValue=calculateHandValue(document.getElementById("playersHand"));
+    playerValueDisplay.innerHTML=playerValue;
 }
 
 function endRound() {
@@ -49,7 +59,9 @@ function endRound() {
   const dealerValue = calculateHandValue(document.getElementById("dealersHand"));
 
   /* outcomes */
-  if (playerValue > 21) {
+  if (playerValue === 21) {
+    console.log("Player wins by hitting BlackJack!")
+  } else if (playerValue > 21) {
     console.log("Player busts! Dealer wins.");
   } else if (dealerValue > 21) {
     console.log("Dealer busts! Player wins.");
@@ -167,12 +179,8 @@ async function dealerTurn() {
   while (dealerValue < 17) {
     await hitDealer(); // Draw a card for the dealer
     dealerValue = calculateHandValue(dealersHand); // Recalculate dealer's hand value
+    dealerValueDisplay.innerHTML=dealerValue;
     console.log("Dealer's hand value:", dealerValue);
-  }
-
-  // Check if the dealer busts
-  if (dealerValue > 21) {
-    console.log("Dealer busts!");
   }
 
   endRound(); // End the round after the dealer finishes their turn
