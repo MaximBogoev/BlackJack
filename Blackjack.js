@@ -45,6 +45,9 @@ async function startRound() {
   isPlayerTurn = true; // Reset the turn to the player
   console.log("round started");
   await resetHands();
+  await hitDealer();
+  dealerValue=calculateHandValue(document.getElementById("dealersHand"));
+    dealerValueDisplay.innerHTML= dealerValue;
   await hit(); // Player's first card
     playerValue=calculateHandValue(document.getElementById("playersHand"));
     playerValueDisplay.innerHTML=playerValue;
