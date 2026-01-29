@@ -4,13 +4,18 @@
   <meta charset="UTF-8">
   <title>Blackjack</title>
   <script src="Blackjack.js" defer></script>
+  <script src="looks.js" defer></script>
   <link rel="stylesheet" href="Blackjack.css">
 </head>
 <body>
-  <h1> Dealer`s hand: <b id="D-Value">0</b></h1>
+  <section class="endScreen" id="endScreen">
+      <h1 id="resultHeading">Result</h1>
+  </section>
+
+  <h2> Dealer`s hand: <b id="D-Value">0</b></h1>
   <ul id="dealersHand"></ul>
 
-  <h1> Your hand: <b id="P-Value">0</b></h1>
+  <h2> Your hand: <b id="P-Value">0</b></h1>
   <ul id="playersHand"></ul>
 
   <button id="startRound"><b>Start Round</b></button>
