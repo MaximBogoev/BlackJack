@@ -47,7 +47,7 @@ async function startRound() {
   await resetHands();
   await hitDealer();
   dealerValue=calculateHandValue(document.getElementById("dealersHand"));
-    dealerValueDisplay.innerHTML= dealerValue;
+    dealerValueDisplay.innerHTML= dealerValue + " + ?";
   await hit(); // Player's first card
     playerValue=calculateHandValue(document.getElementById("playersHand"));
     playerValueDisplay.innerHTML=playerValue;

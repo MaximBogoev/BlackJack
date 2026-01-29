@@ -48,7 +48,7 @@ li {
 /* lift cards */
 li:hover{
   box-shadow: 0 5px 3px rgba(0, 0, 0, 0.45);
-  transform: translateY(-5px);
+  margin-bottom: 10px;  
 }
 button{
   margin-top: 33px;
@@ -67,15 +67,39 @@ button:disabled{
   border: solid 2px gray;
 }
 .deck{
+  /* position */
+  position: fixed;
+  bottom: 100px;
+  right: 100px;
+  transform: scale(110%);
+  z-index: -1;
+  /* look */
   width: 45px;
   height: 63px;
   background-color: lightgray;
   border: solid 1px black;
   border-radius: 7px;
   filter: hue-rotate(290deg);
-  position: absolute;
-  bottom: 100px;
-  right: 100px;
-  transform: scale(110%);
   box-shadow: 0 3px 3px ghostwhite,0 7px 2px #9c9c9c,0 10px 0 #6a6a6a;
+}
+section.endScreen{
+  /* screen */
+  height: 100vh;
+  width: 100vw;
+  background-color: red;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: -2;
+  /* text position */
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* text look */
+h1{
+  color: whitesmoke;  
 }
