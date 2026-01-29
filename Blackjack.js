@@ -55,6 +55,9 @@ async function startRound() {
   await hit(); // Player's second card
     playerValue=calculateHandValue(document.getElementById("playersHand"));
     playerValueDisplay.innerHTML=playerValue;
+    if (playerValue >= 21) {
+      endRound();
+    }
 }
 
 function endRound() {
@@ -63,17 +66,17 @@ function endRound() {
 
   /* outcomes */
   if (playerValue === 21) {
-    console.log("Player wins by hitting BlackJack!")
+    Win();
   } else if (playerValue > 21) {
-    console.log("Player busts! Dealer wins.");
+    Lose();
   } else if (dealerValue > 21) {
-    console.log("Dealer busts! Player wins.");
+    Win();
   } else if (playerValue > dealerValue) {
-    console.log("Player wins!");
+    Win();
   } else if (dealerValue > playerValue) {
-    console.log("Dealer wins!");
+    Lose();
   } else {
-    console.log("It's a tie!");
+    Tie();
   }
 
   // Reset for next round
@@ -245,49 +248,3 @@ function resetHands() {
     }, (cards.length + 1) * 100);
   });
 }
-/*
-//TODO: CALLBACKS:
-venter på at en function blir gjort ferdig før den kjører
-
-sync program kjører:
-prossess 1
-prossess 2
-prossess 3
-
-async kan:
-prossess 2
-prossess 3
-prossess 1
-hvor prossess 1 tar tid
-
-//TODO: PROMISE:
-kan returnere success eller failure
-sender tilbake en value
-
-success = resolve (resolver promisen)
-failure = reject (rejecter promisen)
-
-hvis den ikke får en eller annen kommer feilmelding i compileren
-
-//TODO: .THEN og .CATCH:
-to ting man kan bruke på en promise
-
-if resolve: .then
-if reject: .catch
-
-//TODO: AWAIT:
-den venter på at noe executer før den fortsetter
-
-await openLaptop();
-
-//TODO: RECURSION:
-function som caller seg selv
-
-base case: a condition to stop the recursion
-otherwise så blir den infinite
-
-recursive calls: a function calls itself to reduce the problem
-disse kan man kalle subproblems og de må reache en base case, otherwise infinite (error)
-
- */
-
